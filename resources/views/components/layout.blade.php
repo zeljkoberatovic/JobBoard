@@ -12,8 +12,10 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-        <body>
+        <body class="mx-auto mt-10 max-w-2xl bg-slate-200 text-slate-700">
 
             {{ $slot }}
+
+            
         </body>
 </html>

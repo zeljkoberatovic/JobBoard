@@ -1,1 +1,1 @@
-JobBoard - App
+JobBoard - Application

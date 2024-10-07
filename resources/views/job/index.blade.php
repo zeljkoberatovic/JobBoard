@@ -4,6 +4,7 @@
     :links="['Jobs' => route('jobs.index')]" />
 
     <x-card class="mb-4 text-sm">
+      <form action="{{ route('jobs.index') }}" method="GET">
       <div class="mb-4 grid grid-cols-2 gap-4">
         <div>
           <div class="mb-1 font-semibold">Search</div>
@@ -20,6 +21,8 @@
         <div>3</div>
         <div>4</div>
       </div>
+      <button class="w-full">Filter</button>
+    </form>
     </x-card>
 
     @foreach ($jobs as $job)

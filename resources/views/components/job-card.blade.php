@@ -19,9 +19,9 @@
       </div>
     </div>
   
-    <p class="mb-4 text-sm text-slate-500">
+    <!--<p class="mb-4 text-sm text-slate-500">
       {!! nl2br(e($job->description)) !!}
-    </p>
+    </p>-->
   
     {{ $slot }}
   </x-card>

@@ -12,7 +12,15 @@ class JobController extends Controller
      */
     public function index()
     {
-        return view('job.index', ['jobs' => Job::all()]);
+        $jobs = Job::query();
+
+    // Ako postoji parametar 'search' u zahtevima (request), izvrši ovu funkciju
+        $jobs->when(request('search'), function ($query) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%');
+        });
+     // Vraća pogled 'job.index' sa dobijenim poslovima
+        return view('job.index', ['jobs' => $jobs->get()]);
     }
 
     /**

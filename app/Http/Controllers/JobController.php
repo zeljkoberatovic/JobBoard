@@ -12,34 +12,16 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::query();
+        $filters = request()->only(
+            'search',
+            'min_salary',
+            'max_salary',
+            'experience',
+            'category'
+        );
 
-    // Dodavanje filtera za pretragu po naslovu ili opisu posla
-        $jobs->when(request('search'), function ($query) {
-            $query->where(function ($query) {
-                $query->where('title', 'like', '%' . request('search') . '%')
-                    ->orWhere('description', 'like', '%' . request('search') . '%');
-            });
+        return view('job.index', ['jobs' => Job::filter($filters)->get()]);
 
-    // Filtriranje po minimalnoj plati 
-        })->when(request('min_salary'), function ($query) {
-            $query->where('salary', '>=', request('min_salary'));
-
-    // Filtriranje po maksimalnoj plati
-        })->when(request('max_salary'), function ($query) {
-            $query->where('salary', '<=', request('max_salary'));
-
-    // Filtriranje po iskustvu
-        })->when(request('experience'), function ($query) {
-            $query->where('experience', request('experience'));
-
-    
-    // Filtriranje po kategoriji        
-        })->when(request('category'), function ($query) {
-            $query->where('category', request('category'));
-    });
-     
-        return view('job.index', ['jobs' => $jobs->get()]);
     }
     
 

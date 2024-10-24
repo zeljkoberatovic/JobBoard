@@ -8,6 +8,10 @@
             {!! nl2br(e($job->description)) !!}
           </p>
     
+
+    {{-- Proverava da li korisnik može da se prijavi za posao. 
+      Ako može, prikazuje dugme za prijavu. 
+        Ako je korisnik već podneo prijavu, prikazuje poruku o tome. --}}
           @can('apply', $job)
       <x-link-button :href="route('job.application.create', $job)">
         Apply

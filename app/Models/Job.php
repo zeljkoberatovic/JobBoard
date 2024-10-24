@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,6 +32,20 @@ class Job extends Model
     {
         return $this->hasMany(JobApplication::class);
     }
+
+    public function hasUserApplied(Authenticatable|User|int $user): bool
+    {
+        // Provera da li je prosleđen objekat korisnika ili ID, i dobijanje odgovarajućeg ID-a
+        $userId = $user instanceof User || $user instanceof Authenticatable ? $user->id : $user;
+    
+        // Provera da li u tabeli poslova postoji prijava (jobApplications) sa datim user_id za ovaj posao
+        return $this->where('id', $this->id)
+            ->whereHas(
+                'jobApplications',
+                fn($query) => $query->where('user_id', '=', $userId)
+            )->exists(); // Vraća true ako postoji prijava, inače false
+    }
+    
     
 
     public function scopeFilter(Builder|QueryBuilder $query, array $filters): Builder|QueryBuilder

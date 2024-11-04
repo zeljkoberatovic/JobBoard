@@ -9,6 +9,9 @@
       <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+      <!-- Font Awesome CDN -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     </head>
 
     <body class="mx-auto mt-10 max-w-2xl bg-gradient-to-r from-blue-300 via-blue-200 to-gray-300 text-slate-900">
@@ -64,8 +67,6 @@
                   <p>{{ session('error') }}</p>
                 </div>
               @endif
-
-
-        {{ $slot }}
+         {{ $slot }}
       </body>
 </html>

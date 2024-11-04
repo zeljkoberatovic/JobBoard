@@ -43,4 +43,10 @@
       </div>
     </div>
     @endforelse
+
+     <!-- Paginacija -->
+     <div class="mt-4">
+      {{ $applications->links('vendor.pagination') }}
+  </div>
+  
   </x-layout>

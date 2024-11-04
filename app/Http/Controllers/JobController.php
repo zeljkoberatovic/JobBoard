@@ -21,10 +21,13 @@ class JobController extends Controller
             'category'
         );
 
-        
-        return view('job.index',['jobs' => Job::with('employer')->latest()->filter($filters)->get()]
-        );
+        // Paginacija - prikazivanje 10 poslova po stranici
+        $jobs = Job::with('employer')
+            ->latest()
+            ->filter($filters)
+            ->paginate(10); // promenjeno iz get() u paginate()
 
+        return view('job.index', ['jobs' => $jobs]);
     }
 
     /**
@@ -32,10 +35,7 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-
         $this->authorize('view', $job);
         return view('job.show', ['job' => $job->load('employer.jobs')]);
     }
-
-    
 }

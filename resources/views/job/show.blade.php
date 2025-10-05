@@ -1,6 +1,5 @@
 <x-layout>
-
-<x-breadcrumbs class="mb-4"
+  <x-breadcrumbs class="mb-4"
     :links="['Jobs' => route('jobs.index'), $job->title => '#']"/>
 
   <x-job-card :$job >
@@ -9,11 +8,8 @@
           </p>
     
 
-    {{-- Proverava da li korisnik može da se prijavi za posao. 
-      Ako može, prikazuje dugme za prijavu. 
-        Ako je korisnik već podneo prijavu, prikazuje poruku o tome. --}}
           @can('apply', $job)
-      <x-link-button :href="route('job.application.create', $job)">
+  <x-link-button :href="route('job.application.create', $job)">
         Apply
       </x-link-button>
     @else

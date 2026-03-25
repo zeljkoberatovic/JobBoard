@@ -25,8 +25,13 @@ class JobApplicationController extends Controller
     {
         $this->authorize('apply', $job);
 
+        if ($job->jobApplications()->where('user_id', $request->user()->id)->exists()) {
+            return redirect()->route('jobs.show', $job)
+                ->with('error', 'You have already applied to this job.');
+        }
+
         $validatedData = $request->validate([
-            'expected_salary' => 'required|min:1|max:1000000',
+            'expected_salary' => 'required|integer|min:1|max:1000000',
             'cv' => 'required|file|mimes:pdf|max:2048'
         ]);
 

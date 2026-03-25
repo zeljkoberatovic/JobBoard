@@ -58,6 +58,7 @@ class MyJobApplicationController extends Controller
     
     public function destroy(JobApplication $myJobApplication)
     {
+        abort_unless($myJobApplication->user_id === auth()->id(), 403);
         $myJobApplication->delete();
 
         return redirect()->back()->with(
